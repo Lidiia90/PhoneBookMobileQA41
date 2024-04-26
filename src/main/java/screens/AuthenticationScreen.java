@@ -16,7 +16,6 @@ public class AuthenticationScreen extends BaseScreen {
     public AuthenticationScreen(AppiumDriver<MobileElement> driver) {
         super(driver);
     }
-
     @FindBy(xpath = "//*[@resource-id='com.sheygam.contactapp:id/action_bar']/android.widget.TextView")
     MobileElement titleText;
     @FindBy(id = "com.sheygam.contactapp:id/inputEmail")
@@ -35,8 +34,8 @@ public class AuthenticationScreen extends BaseScreen {
     MobileElement okButton;
 
     public AuthenticationScreen fillEmailField(String email){
-        waitForAnElement(inputEmailField);
-        inputEmailField.sendKeys(email);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.visibilityOf(inputEmailField)).sendKeys(email);
         return this;
     }
 
@@ -56,7 +55,8 @@ public class AuthenticationScreen extends BaseScreen {
     }
 
     public boolean isItAuthenticationScreen(){
-        return titleText.isDisplayed();
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        return wait.until(ExpectedConditions.visibilityOf(titleText)).isDisplayed();
     }
 
     public <T extends BaseScreen> T clickByRegistrationButton() {
@@ -73,8 +73,7 @@ public class AuthenticationScreen extends BaseScreen {
     public boolean isErrorTextDisplayed() {
         try {
             WebDriverWait wait = new WebDriverWait(driver, 10);
-            wait.until(ExpectedConditions.visibilityOf(errorMessage));
-            return errorMessage.isDisplayed();
+            return wait.until(ExpectedConditions.visibilityOf(errorMessage)).isDisplayed();
         } catch (NoSuchElementException | TimeoutException e) {
             return false;
         }
@@ -91,8 +90,7 @@ public class AuthenticationScreen extends BaseScreen {
     public boolean isErrorMessageDisplayed() {
         try {
             WebDriverWait wait = new WebDriverWait(driver, 10);
-            wait.until(ExpectedConditions.visibilityOf(errorMessage));
-            return errorMessage.isDisplayed();
+            return wait.until(ExpectedConditions.visibilityOf(errorMessage)).isDisplayed();
         } catch (NoSuchElementException | TimeoutException e) {
             return false;
         }
@@ -101,4 +99,4 @@ public class AuthenticationScreen extends BaseScreen {
     public void clickOkButton() {
         okButton.click();
     }
-    }
+}

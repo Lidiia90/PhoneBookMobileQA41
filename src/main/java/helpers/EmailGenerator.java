@@ -24,11 +24,11 @@ public class EmailGenerator {
         for (int i = 0; i < a; i++ ){
             email.append(randomChar());
         }
-        email.append(".");
+        email.append("@");
         for (int i = 0; i < b; i++ ){
             email.append(randomChar());
         }
-        email.append(".");
+        email.append("@");
         for (int i = 0; i < c; i++ ){
             email.append(randomChar());
         }
